@@ -27,7 +27,7 @@ import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
 
-import './app.css';
+import './app.scss';
 
 angular.module('adminInterfaceApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io',
   uiRouter, uiBootstrap, _Auth, account, admin, navbar, footer, main, constants, socket, util
