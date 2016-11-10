@@ -357,7 +357,7 @@ gulp.task('serve:debug', cb => {
             'lint:scripts',
             'inject',
             'copy:fonts:dev',
-            'env:all'
+            'env:algl'
         ],
         'webpack:dev',
         'start:inspector',

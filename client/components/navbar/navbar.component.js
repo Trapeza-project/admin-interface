@@ -3,6 +3,7 @@
 
 import angular from 'angular';
 
+
 export class NavbarComponent {
   menu = [{
     title: 'Dashboard',
@@ -21,6 +22,10 @@ export class NavbarComponent {
     this.isLoggedIn = Auth.isLoggedInSync;
     this.isAdmin = Auth.isAdminSync;
     this.getCurrentUser = Auth.getCurrentUserSync;
+  }
+  
+  toggleSidebar = function(){
+    this.toggle = !this.toggle;
   }
 
 }
