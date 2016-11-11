@@ -5,14 +5,23 @@
       <label for="custom-search-input">Search by security number</label>
       <div id="custom-search-input">
         <div class="input-group col-md-12">
-          <input type="text" class="form-control input-lg" placeholder="YYYYMMDDXXXX" ng-keypress="$ctrl.validate($event)"/>
+          <input id="search-input-field" type="text" class="form-control input-lg" placeholder="YYYYMMDDXXXX" ng-model="userSearchCtrl.searchText" ng-keypress="userSearchCtrl.validate($event)"/>
             <span class="input-group-btn">
-                <button class="btn btn-info btn-lg" type="button" >
+                <button class="btn btn-info btn-lg" type="button" ng-click="userSearchCtrl.search()">
                   <i class="glyphicon glyphicon-search"></i>
                 </button>
             </span>
         </div>
       </div>
     </div>
+  </div>
+  <div class="row" ng-if="userSearchCtrl.showResult">
+    <uib-tabset active="active">
+      <uib-tab index="0" heading="Overview">Static content</uib-tab>
+      <uib-tab index="1" heading="Activity">Test 2</uib-tab>
+      <uib-tab index="2" heading="Check up history">Test 2</uib-tab>
+      <uib-tab index="3" heading="Financial information">Test 2</uib-tab>
+      <uib-tab index="4" heading="Education information">Test 2</uib-tab>
+    </uib-tabset>
   </div>
 </div>
