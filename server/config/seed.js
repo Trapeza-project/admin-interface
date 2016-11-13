@@ -7,6 +7,30 @@
 import sqldb from '../sqldb';
 var Thing = sqldb.Thing;
 var User = sqldb.User;
+var Person = sqldb.Person;
+
+Person.sync()
+  .then(() =>
+    Person.destroy({ where: {} })
+  )
+  .then(() => {
+    Person.bulkCreate([{
+      name: 'Anders Svensson',
+      securityNumber: 199010101234,
+      address: "Sveavägen 45",
+      age: 45,
+      activity: JSON.stringify([
+        {timestamp: '2016-10-23 12:30:33', type: 'info', info: 'Data changed'},
+        {timestamp: '2016-10-21 12:30:33', type: 'info', info: 'Got new data from Skatteverket'},
+        {timestamp: '2016-10-18 12:30:33', type: 'info', info: 'Data changed'},
+        {timestamp: '2016-09-20 12:30:33', type: 'warning', info: 'Data not verified'},
+        {timestamp: '2016-08-23 12:30:33', type: 'error', info: 'Strange thing happened'}
+      ])
+    }])
+      .then(() => {
+        console.log('finished populating persons');
+      });
+  });
 
 Thing.sync()
   .then(() =>
@@ -40,7 +64,10 @@ Thing.sync()
       name: 'Deployment Ready',
       info: 'Easily deploy your app to Heroku or Openshift with the heroku '
             + 'and openshift subgenerators'
-    }]);
+    }])
+      .then(() => {
+        console.log('finished populating things');
+      });
   });
 
 User.sync()

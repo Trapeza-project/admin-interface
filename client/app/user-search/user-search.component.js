@@ -6,10 +6,13 @@ export class UserSearchController {
 
   searchText = "";
   showResult = false;
+  overviewInfo = {};
+  activity = {};
   /*@ngInject*/
-  constructor($http, socket) {
+  constructor($http, $scope, socket) {
     this.$http = $http;
     this.socket = socket;
+
   }
 
   validate(evt) {
@@ -21,6 +24,10 @@ export class UserSearchController {
         theEvent.returnValue = false;
         if (theEvent.preventDefault) theEvent.preventDefault();
       }
+      if(theEvent.keyCode === 13 && this.searchText.length == 12){
+        this.search();
+      }
+
     }
     search() {
       console.log('search', this.searchText);
@@ -28,6 +35,18 @@ export class UserSearchController {
         this.showResult = false;
         return;
       }
+      this.$http.get('/api/persons/' + this.searchText)
+        .then(response => {
+          console.log(response.data);
+          this.overviewInfo = {
+            'Name': response.data.name,
+            'Security number': response.data.securityNumber,
+            'Address': response.data.address,
+            'Age': response.data.age
+          };
+          this.activity = JSON.parse(response.data.activity);
+          console.log(this.activity);
+        });
       this.showResult = true;
   }
 }
